@@ -23,9 +23,9 @@ import java.time.Instant;
 @Table(name = "user_scores")
 public class UserScore {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_scores_id_gen")
-    @SequenceGenerator(name = "user_scores_id_gen", sequenceName = "user_scores_id_seq", allocationSize = 1)
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)//SEQUENCE, generator = "user_scores_id_gen")
+//    @SequenceGenerator(name = "user_scores_id_gen", sequenceName = "user_scores_id_seq", allocationSize = 1)
+//    @Column(name = "id", nullable = false)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
