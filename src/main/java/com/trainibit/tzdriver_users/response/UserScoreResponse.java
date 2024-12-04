@@ -1,4 +1,4 @@
 package com.trainibit.tzdriver_users.response;
 
-public class ResponseUserScore {
+public class UserScoreResponse {
 }
