@@ -12,7 +12,6 @@ public class UserResponse {
     private UUID uuid;
     private String name;
     private String phoneNumber;
-    private String phone_number;
 
     public String registeredAt;  // Exponer como String directamente
     private Boolean active;

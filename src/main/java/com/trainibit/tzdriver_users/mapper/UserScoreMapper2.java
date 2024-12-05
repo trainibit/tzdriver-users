@@ -11,7 +11,7 @@ public interface UserScoreMapper2 {
     @Mappings({
             //source de donde saca el name que viene de usuario, y en target donde quiero que se deposite
             @Mapping(source = "name", target = "name"),
-            @Mapping(source = "phone_number", target = "phone numeber")
+            @Mapping(source = "phone_number", target = "phoneNumber")
     })
     UserResponse mapEntityTODTO(User user);
 }
