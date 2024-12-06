@@ -14,7 +14,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     List<User>findByActiveTrue();
     User findByUuidAndActiveTrue(UUID uuid);
-    User deleteByUuidActiveTrue(UUID uuid);
-    User saveUser(User user);
-    User updateUser(User user);
+    User deleteByUuidAndActiveTrue(UUID uuid);
+    //User saveUser(User user);
+    //User updateUser(User user);
 }

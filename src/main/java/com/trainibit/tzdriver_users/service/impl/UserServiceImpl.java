@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
 
     //metodo para traer a todos los usuarios
     @Override
-    public List<UserResponse> getAllUsers() {
+    public List<UserResponse> findAllUsers() {
         List<User> entites = userRepository.findAll(); //obtenemos la lista completa de usuarios en el repositorio
         return entites.stream().map(userMapper::toResponse)
         //convertimos cada usuario en un User response usando  el mmapeer
@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
         return userMapper.toResponse(savedUser);
     }
     @Override
-    public void deleteUser(UUID uuid) {
+    public void deleteUsers(UUID uuid) {
         User user = userRepository.findByUuidAndActiveTrue(uuid); // Buscar usuario activo por UUID
         if (user != null) {
             user.setActive(false); // Marcamos el usuario como inactivo en lugar de eliminarlo
