@@ -13,7 +13,7 @@ public class UserResponse {
     private String name;
     private String phoneNumber;
 
-    public String registeredAt;  // Exponer como String directamente
+    public Timestamp registeredAt;  // Exponer como String directamente
     private Boolean active;
 
     public Timestamp updatedAt;

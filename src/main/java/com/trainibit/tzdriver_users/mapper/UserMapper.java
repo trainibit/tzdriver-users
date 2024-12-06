@@ -5,6 +5,8 @@ import com.trainibit.tzdriver_users.repository.UserRepository;
 import com.trainibit.tzdriver_users.response.UserResponse;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 @Component
 public class UserMapper {
 
@@ -12,19 +14,24 @@ public class UserMapper {
     public UserResponse toResponse(User user) {
         UserResponse responseDTO = new UserResponse(); //creamos DTO
         responseDTO.setName(user.getName());
-        responseDTO.setPhone_number(user.getPhoneNumber());
+        responseDTO.setPhoneNumber(user.getPhoneNumber());
         responseDTO.setActive(user.getActive());
+        responseDTO.setRegisteredAt(user.getRegisteredAt());
+        responseDTO.setUpdatedAt(user.getUpdatedAt());
+        responseDTO.setUuid(user.getUuid());
 
         //regresamos el dto con los datos mapeados y seteados
         return responseDTO;
     }
 
-    public User toUser(UserResponse userResponseDTO) {
+    public User toRequest(UserResponse userResponseDTO) {
         User requestDTO = new User();
         requestDTO.setName(userResponseDTO.getName());
-        requestDTO.setPhoneNumber(userResponseDTO.getPhone_number());
+        requestDTO.setPhoneNumber(userResponseDTO.getPhoneNumber());
         requestDTO.setActive(userResponseDTO.getActive());
+        requestDTO.setUuid(UUID.randomUUID());
         return requestDTO;
+
     }
 
 }

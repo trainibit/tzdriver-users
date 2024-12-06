@@ -12,6 +12,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 
+import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -36,10 +37,6 @@ public class User {
     @Column(name = "phone_number", nullable = false, length = 15)
     private String phoneNumber;
 
-    @ColumnDefault("CURRENT_TIMESTAMP")
-    @Column(name = "registered_at", nullable = false)
-    private Instant registeredAt;
-
     @ColumnDefault("true")
     @Column(name = "active", nullable = false)
     private Boolean active = false;
@@ -49,7 +46,11 @@ public class User {
 
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "updated_at", nullable = false)
-    private Instant updatedAt;
+    private Timestamp updatedAt;
+
+    @ColumnDefault("CURRENT_TIMESTAMP")
+    @Column(name = "registered_at", nullable = false)
+    private Timestamp registeredAt;
 
     @OneToMany(mappedBy = "user")
     private List<UserScore> userScores = new ArrayList<>();
