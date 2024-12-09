@@ -2,6 +2,7 @@ package com.trainibit.tzdriver_users.mapper;
 
 import com.trainibit.tzdriver_users.entity.User;
 import com.trainibit.tzdriver_users.repository.UserRepository;
+import com.trainibit.tzdriver_users.request.UserRequest;
 import com.trainibit.tzdriver_users.response.UserResponse;
 import org.springframework.stereotype.Component;
 
@@ -24,13 +25,13 @@ public class UserMapper {
         return responseDTO;
     }
 
-    public User toRequest(UserResponse userResponseDTO) {
-        User requestDTO = new User();
-        requestDTO.setName(userResponseDTO.getName());
-        requestDTO.setPhoneNumber(userResponseDTO.getPhoneNumber());
-        requestDTO.setActive(userResponseDTO.getActive());
-        requestDTO.setUuid(UUID.randomUUID());
-        return requestDTO;
+    public User requestToEntity(UserRequest userRequest) {
+        User user = new User();
+        user.setName(userRequest.getName());
+        user.setPhoneNumber(userRequest.getPhoneNumber());
+        user.setActive(userRequest.getActive());
+        user.setUuid(UUID.randomUUID());
+        return user;
 
     }
 

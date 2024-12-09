@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
             user.setUuid(UUID.randomUUID()); //asignar un uuid si usuario es nuevo
         }
         //si usuario ya existe actualizamos
-        if(user.getId() == null){
+        if(user.getUuid() == null){
 
             User userExists = userRepository.findByUuidAndActiveTrue(user.getUuid());
             if(userExists != null){
