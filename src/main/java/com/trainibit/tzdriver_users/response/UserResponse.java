@@ -13,9 +13,9 @@ public class UserResponse {
     private String name;
     private String phoneNumber;
 
-    public Timestamp registeredAt;  // Exponer como String directamente
-    private Boolean active;
-
-    public Timestamp updatedAt;
+//    public Timestamp registeredAt;  // Exponer como String directamente
+//    private Boolean active;
+//
+//    public Timestamp updatedAt;
 
 }

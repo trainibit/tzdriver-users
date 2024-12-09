@@ -16,9 +16,9 @@ public class UserMapper {
         UserResponse responseDTO = new UserResponse(); //creamos DTO
         responseDTO.setName(user.getName());
         responseDTO.setPhoneNumber(user.getPhoneNumber());
-        responseDTO.setActive(user.getActive());
-        responseDTO.setRegisteredAt(user.getRegisteredAt());
-        responseDTO.setUpdatedAt(user.getUpdatedAt());
+//        responseDTO.setActive(user.getActive());
+//        responseDTO.setRegisteredAt(user.getRegisteredAt());
+//        responseDTO.setUpdatedAt(user.getUpdatedAt());
         responseDTO.setUuid(user.getUuid());
 
         //regresamos el dto con los datos mapeados y seteados
@@ -29,7 +29,6 @@ public class UserMapper {
         User user = new User();
         user.setName(userRequest.getName());
         user.setPhoneNumber(userRequest.getPhoneNumber());
-        user.setActive(userRequest.getActive());
         user.setUuid(UUID.randomUUID());
         return user;
 
