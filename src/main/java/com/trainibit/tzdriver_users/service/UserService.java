@@ -8,6 +8,7 @@ import java.util.UUID;
 
 public interface UserService {
 
+     List<UserResponse> findAllUsersTrue();
      List<UserResponse> findAllUsers();
      UserResponse findUserByUuid(UUID uuid);
      UserResponse saveOrUpdateUser(User user);

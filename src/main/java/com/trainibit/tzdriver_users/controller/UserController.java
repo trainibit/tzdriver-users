@@ -25,6 +25,14 @@ public class UserController {
     //Creacion de endpoint para traer todos los usuarios
     @GetMapping
     public ResponseEntity<List<UserResponse>>findAllUsers() {
+        List<UserResponse> users = userService.findAllUsersTrue();
+        return new ResponseEntity<>(users, HttpStatus.OK);
+    }
+
+
+    //traer a todos los usuarios
+    @GetMapping("/all")
+    public ResponseEntity<List<UserResponse>>findAll() {
         List<UserResponse> users = userService.findAllUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
@@ -55,5 +63,12 @@ public class UserController {
         user.setUuid(uuid); // Aseguramos que el UUID esté presente
         UserResponse userResponse = userService.saveOrUpdateUser(user);
         return new ResponseEntity<>(userResponse, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{uuid}")
+    public ResponseEntity<Void> deleteUser(@PathVariable UUID uuid) {
+        userService.deleteUsers(uuid);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
     }
 }

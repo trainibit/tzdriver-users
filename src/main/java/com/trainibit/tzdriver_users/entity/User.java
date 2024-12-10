@@ -41,7 +41,7 @@ public class User {
 
     @ColumnDefault("true")
     @Column(name = "active", nullable = false)
-    private Boolean active = false;
+    private Boolean active = true;
 
     @Column(name = "uuid", nullable = false)
     private UUID uuid;

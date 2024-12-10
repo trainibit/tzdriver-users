@@ -23,11 +23,17 @@ public class UserServiceImpl implements UserService {
 
     //metodo para traer a todos los usuarios
     @Override
-    public List<UserResponse> findAllUsers() {
-        List<User> entites = userRepository.findAll(); //obtenemos la lista completa de usuarios en el repositorio
-        return entites.stream().map(userMapper::toResponse)
+    public List<UserResponse> findAllUsersTrue() {
+        List<User> entities = userRepository.findByActiveTrue(); //obtenemos la lista completa de usuarios en el repositorio
+        return entities.stream().map(userMapper::toResponse)
         //convertimos cada usuario en un User response usando  el mmapeer
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<UserResponse> findAllUsers(){
+        List<User> entities = userRepository.findAll();
+        return entities.stream().map(userMapper::toResponse).collect(Collectors.toList());
     }
 
     @Override
@@ -42,7 +48,7 @@ public class UserServiceImpl implements UserService {
             user.setUuid(UUID.randomUUID()); //asignar un uuid si usuario es nuevo
         }
         //si usuario ya existe actualizamos
-        if(user.getUuid() == null){
+        if(user.getUuid() != null){
 
             User userExists = userRepository.findByUuidAndActiveTrue(user.getUuid());
             if(userExists != null){
@@ -50,6 +56,8 @@ public class UserServiceImpl implements UserService {
                 userExists.setPhoneNumber(user.getPhoneNumber());
                 userExists.setActive(user.getActive());
                 user = userExists;
+            }else{
+                throw new RuntimeException("User not found");
             }
         }
         User savedUser = userRepository.save(user);
