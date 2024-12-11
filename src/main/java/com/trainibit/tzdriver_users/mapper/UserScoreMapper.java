@@ -3,11 +3,18 @@ package com.trainibit.tzdriver_users.mapper;
 import com.trainibit.tzdriver_users.entity.UserScore;
 import com.trainibit.tzdriver_users.request.UserScoreRequest;
 import com.trainibit.tzdriver_users.response.UserScoreResponse;
+import com.trainibit.tzdriver_users.service.impl.UserScoreServiceImpl;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 @Component
 public class UserScoreMapper {
+
+    private final UserScoreServiceImpl userScoreServiceImpl;
+
+    public UserScoreMapper(UserScoreServiceImpl userScoreServiceImpl) {
+        this.userScoreServiceImpl = userScoreServiceImpl;
+    }
 
     public UserScoreResponse EntityToResponse(UserScore userScore) {
         UserScoreResponse userScoreResponse = new UserScoreResponse();
@@ -16,7 +23,7 @@ public class UserScoreMapper {
         userScoreResponse.setScoCleanning(userScore.getCleanning());
         userScoreResponse.setScoPunctuality(userScore.getPunctuality());
         userScoreResponse.setScoCordiality(userScore.getCordiality());
-        userScoreResponse.setTotalScore();
+        userScoreResponse.setTotalScore(userScoreServiceImpl.calculateUserScore(userScore.getCommunication(), userScore.getCleanning(), userScore.getPunctuality(), userScore.getCordiality()));
         userScoreResponse.setComments(userScore.getComments());
         return userScoreResponse;
     }

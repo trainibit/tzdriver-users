@@ -12,5 +12,6 @@ public interface UserScoreRepository extends JpaRepository<UserScore, Long> {
 
     //metodo para traer una lista de usuarios activos
     List<UserScore> findByActiveTrue();
+    //Buscar un solo registro
     UserScore findByUuidAndActiveTrue(UUID uuid);
 }
