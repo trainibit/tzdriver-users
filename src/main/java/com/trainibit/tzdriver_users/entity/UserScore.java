@@ -59,4 +59,8 @@ public class UserScore {
     @Column(name = "comments", nullable = false, length = Integer.MAX_VALUE)
     private String comments;
 
+    @ColumnDefault("true")
+    @Column(name = "active", nullable = false)
+    private Boolean active = true;
+
 }

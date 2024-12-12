@@ -1,6 +1,7 @@
 package com.trainibit.tzdriver_users.service;
 
 import com.trainibit.tzdriver_users.entity.User;
+import com.trainibit.tzdriver_users.entity.UserScore;
 import com.trainibit.tzdriver_users.response.UserResponse;
 import com.trainibit.tzdriver_users.response.UserScoreResponse;
 
@@ -15,7 +16,7 @@ public interface UserScoreService {
     //buscar por uuid
     UserScoreResponse findUserScoreByUuid(UUID uuid);
     //guardar actualizar
-    UserScoreResponse saveOrUpdateUserScore(User user);
+    UserScoreResponse saveUserScore(UserScore userScore);
 
     //borrrar
     void deleteUserScore(UUID uuid);

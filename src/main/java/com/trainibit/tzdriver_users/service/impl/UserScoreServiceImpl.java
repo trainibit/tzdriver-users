@@ -23,6 +23,7 @@ public class UserScoreServiceImpl implements UserScoreService{
     @Autowired
     private UserScoreMapper userScoreMapper;
 
+
     @Override
     public List<UserScoreResponse> findAllUserScoresTrue() {
         List<UserScore> userScores = userScoreRepository.findByActiveTrue();
@@ -42,14 +43,28 @@ public class UserScoreServiceImpl implements UserScoreService{
     }
 
     @Override
-    public UserScoreResponse saveOrUpdateUserScore(User user) {
-        //primero wachar que no tengamos un registro pa q sepa si crear o actualizar
-        if(user.getUserScoresUu)
+    public UserScoreResponse saveUserScore(UserScore userScore) {
+        UserScore uScore = new UserScore();
+        uScore.setCommunication(userScore.getCommunication());
+        uScore.setCleanning(userScore.getCleanning());
+        uScore.setPunctuality(userScore.getPunctuality());
+        uScore.setCordiality(userScore.getCordiality());
+        uScore.setTotalScore(userScore.getTotalScore());
+        uScore.setComments(userScore.getComments());
+
+        userScore = uScore;
+        return userScoreMapper.EntityToResponse(userScoreRepository.save(userScore));
     }
 
     @Override
     public void deleteUserScore(UUID uuid) {
-
+            UserScore userScore = userScoreRepository.findByUuidAndActiveTrue(uuid);
+            if(userScore != null){
+                userScore.setActive(false);
+                userScoreRepository.delete(userScore);
+            }else {
+                throw new RuntimeException("UserScore not found");
+            }
     }
 
     @Override
