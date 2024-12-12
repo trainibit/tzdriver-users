@@ -18,8 +18,8 @@ public class UserScoreRequest {
     @NotNull
     private int scoCordiality;
     @NotNull
-    private double totalScore;
-    @NotNull
     private String comments;
+    @NotNull
+    private Long userId;
 
 }

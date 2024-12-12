@@ -2,6 +2,7 @@ package com.trainibit.tzdriver_users.service;
 
 import com.trainibit.tzdriver_users.entity.User;
 import com.trainibit.tzdriver_users.entity.UserScore;
+import com.trainibit.tzdriver_users.request.UserScoreRequest;
 import com.trainibit.tzdriver_users.response.UserResponse;
 import com.trainibit.tzdriver_users.response.UserScoreResponse;
 
@@ -14,13 +15,13 @@ public interface UserScoreService {
     //traer todas las calificaciones
     List<UserScoreResponse> findAllUserScores();
     //buscar por uuid
-    UserScoreResponse findUserScoreByUuid(UUID uuid);
+    UserScoreResponse findUserScoreById(Long id);
     //guardar actualizar
-    UserScoreResponse saveUserScore(UserScore userScore);
+    UserScoreResponse saveUserScore(UserScoreRequest userScoreRequest);
 
     //borrrar
-    void deleteUserScore(UUID uuid);
+    void deleteUserScore(Long id);
 
-    //Calcular promedio
-    Double calculateUserScore(Integer scoCommunication, Integer scoCleanning, Integer scoPunctuality, Integer scoCordiality);
+//    //Calcular promedio
+//    Double calculateUserScore(Integer scoCommunication, Integer scoCleanning, Integer scoPunctuality, Integer scoCordiality);
 }

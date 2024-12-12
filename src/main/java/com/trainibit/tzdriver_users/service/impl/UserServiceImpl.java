@@ -44,22 +44,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponse saveOrUpdateUser(User user){
-        if(user.getUuid() == null){
-            user.setUuid(UUID.randomUUID()); //asignar un uuid si usuario es nuevo
-        }
-        //si usuario ya existe actualizamos
-        if(user.getUuid() != null){
 
-            User userExists = userRepository.findByUuidAndActiveTrue(user.getUuid());
-            if(userExists != null){
-                userExists.setName(user.getName()); // Actualiza solo los campos necesarios
-                userExists.setPhoneNumber(user.getPhoneNumber());
-                userExists.setActive(user.getActive());
-                user = userExists;
-            }else{
-                throw new RuntimeException("User not found");
-            }
-        }
+if(user.getId() != null){        User userExists = userRepository.findByUuidAndActiveTrue(user.getUuid());
+    if(userExists != null){
+        userExists.setName(user.getName()); // Actualiza solo los campos necesarios
+        userExists.setPhoneNumber(user.getPhoneNumber());
+        userExists.setActive(user.getActive());
+        user = userExists;
+    }else{
+        throw new RuntimeException("User not found");
+    }}
+
         User savedUser = userRepository.save(user);
         return userMapper.toResponse(savedUser);
     }

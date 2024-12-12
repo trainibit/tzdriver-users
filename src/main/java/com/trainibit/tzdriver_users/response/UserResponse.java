@@ -9,6 +9,8 @@ import java.util.UUID;
 public class UserResponse {
 
     //Datos que queremos exponber y enviaremos al cliente
+
+    //usar maps strucks
     private UUID uuid;
     private String name;
     private String phoneNumber;

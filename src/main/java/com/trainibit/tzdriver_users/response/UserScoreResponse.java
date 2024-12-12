@@ -8,8 +8,6 @@ import java.util.UUID;
 @Data
 public class UserScoreResponse {
 
-    private UUID uuid;
-
     private int scoCommunication;
 
     private int scoCleanning;

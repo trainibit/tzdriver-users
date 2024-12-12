@@ -13,8 +13,10 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.Instant;
 
 @Getter
@@ -50,11 +52,12 @@ public class UserScore {
 
     @ColumnDefault("0.0")
     @Column(name = "total_score", nullable = false, precision = 2, scale = 1)
-    private BigDecimal totalScore;
+    private BigDecimal totalScore = BigDecimal.valueOf(0.0);
 
+    @UpdateTimestamp
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "registered_at", nullable = false)
-    private Instant registeredAt;
+    private Timestamp registeredAt;
 
     @Column(name = "comments", nullable = false, length = Integer.MAX_VALUE)
     private String comments;
@@ -62,5 +65,4 @@ public class UserScore {
     @ColumnDefault("true")
     @Column(name = "active", nullable = false)
     private Boolean active = true;
-
 }

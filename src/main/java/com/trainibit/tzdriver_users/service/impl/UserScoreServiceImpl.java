@@ -3,7 +3,9 @@ package com.trainibit.tzdriver_users.service.impl;
 import com.trainibit.tzdriver_users.entity.User;
 import com.trainibit.tzdriver_users.entity.UserScore;
 import com.trainibit.tzdriver_users.mapper.UserScoreMapper;
+import com.trainibit.tzdriver_users.repository.UserRepository;
 import com.trainibit.tzdriver_users.repository.UserScoreRepository;
+import com.trainibit.tzdriver_users.request.UserScoreRequest;
 import com.trainibit.tzdriver_users.response.UserScoreResponse;
 import com.trainibit.tzdriver_users.service.UserScoreService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class UserScoreServiceImpl implements UserScoreService{
     @Autowired
     private UserScoreMapper userScoreMapper;
 
+    @Autowired
+    private UserRepository userRepository;
+
 
     @Override
     public List<UserScoreResponse> findAllUserScoresTrue() {
@@ -37,40 +42,33 @@ public class UserScoreServiceImpl implements UserScoreService{
     }
 
     @Override
-    public UserScoreResponse findUserScoreByUuid(UUID uuid) {
-        UserScore userScore = userScoreRepository.findByUuidAndActiveTrue(uuid);
+    public UserScoreResponse findUserScoreById(Long id) {
+        UserScore userScore = userScoreRepository.findByIdAndActiveTrue(id);
         return userScoreMapper.EntityToResponse(userScore);
     }
 
     @Override
-    public UserScoreResponse saveUserScore(UserScore userScore) {
-        UserScore uScore = new UserScore();
-        uScore.setCommunication(userScore.getCommunication());
-        uScore.setCleanning(userScore.getCleanning());
-        uScore.setPunctuality(userScore.getPunctuality());
-        uScore.setCordiality(userScore.getCordiality());
-        uScore.setTotalScore(userScore.getTotalScore());
-        uScore.setComments(userScore.getComments());
-
-        userScore = uScore;
+    public UserScoreResponse saveUserScore(UserScoreRequest userScoreRequest) {
+        User user = userRepository.findById(userScoreRequest.getUserId()).orElse(null);
+        UserScore userScore = userScoreMapper.requestToEntity(userScoreRequest, user);
         return userScoreMapper.EntityToResponse(userScoreRepository.save(userScore));
     }
 
     @Override
-    public void deleteUserScore(UUID uuid) {
-            UserScore userScore = userScoreRepository.findByUuidAndActiveTrue(uuid);
+    public void deleteUserScore(Long id) {
+            UserScore userScore = userScoreRepository.findByIdAndActiveTrue(id);
             if(userScore != null){
                 userScore.setActive(false);
-                userScoreRepository.delete(userScore);
+                userScoreRepository.save(userScore);
             }else {
                 throw new RuntimeException("UserScore not found");
             }
     }
 
-    @Override
-    public Double calculateUserScore(Integer scoCommunication, Integer scoCleanning, Integer scoPunctuality, Integer scoCordiality) {
-        double total = (scoCommunication + scoCleanning + scoPunctuality + scoCordiality);
-        double totalScore = (total)/4;
-        return Math.round(totalScore * 100.0) / 100.0;
-    }
+//    @Override
+//    public Double calculateUserScore(Integer scoCommunication, Integer scoCleanning, Integer scoPunctuality, Integer scoCordiality) {
+//        double total = (scoCommunication + scoCleanning + scoPunctuality + scoCordiality);
+//        double totalScore = (total)/4;
+//        return Math.round(totalScore * 100.0) / 100.0;
+//    }
 }
