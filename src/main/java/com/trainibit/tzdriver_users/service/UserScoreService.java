@@ -22,6 +22,8 @@ public interface UserScoreService {
     //borrrar
     void deleteUserScore(Long id);
 
+    List<Integer> getTotalScore(Long idUser);
+
 //    //Calcular promedio
 //    Double calculateUserScore(Integer scoCommunication, Integer scoCleanning, Integer scoPunctuality, Integer scoCordiality);
 }

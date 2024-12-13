@@ -65,6 +65,12 @@ public class UserScoreServiceImpl implements UserScoreService{
             }
     }
 
+    @Override
+    public List<Integer> getTotalScore(Long idUser) {
+        List<UserScore> userScores = userScoreRepository.findByUserIdAndActiveTrue(idUser);
+        return userScores.stream().map(UserScore.totalScore).collect(Collectors.toList());
+    }
+
 //    @Override
 //    public Double calculateUserScore(Integer scoCommunication, Integer scoCleanning, Integer scoPunctuality, Integer scoCordiality) {
 //        double total = (scoCommunication + scoCleanning + scoPunctuality + scoCordiality);
