@@ -1,0 +1,2 @@
+INSERT INTO public.users ("name", phone_number, registered_at, active, "uuid", updated_at) VALUES('Justin Aldair', '4272906073', '2024-12-09 14:17:21.171', true, '799944e1-e9c1-40a6-b400-1f1107918801'::uuid, '2024-12-09 14:17:21.171');
+INSERT INTO public.users ("name", phone_number, registered_at, active, "uuid", updated_at) VALUES('Aldair Luna', '4272906073', '2024-12-10 12:55:00.188', false, 'b8d724e9-2faa-42ac-8e12-4fae583e5277'::uuid, '2024-12-10 09:30:09.825');

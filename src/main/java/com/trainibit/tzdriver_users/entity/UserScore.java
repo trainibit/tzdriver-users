@@ -13,8 +13,10 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.Instant;
 
 @Getter
@@ -23,9 +25,9 @@ import java.time.Instant;
 @Table(name = "user_scores")
 public class UserScore {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_scores_id_gen")
-    @SequenceGenerator(name = "user_scores_id_gen", sequenceName = "user_scores_id_seq", allocationSize = 1)
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)//SEQUENCE, generator = "user_scores_id_gen")
+//    @SequenceGenerator(name = "user_scores_id_gen", sequenceName = "user_scores_id_seq", allocationSize = 1)
+//    @Column(name = "id", nullable = false)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -50,13 +52,17 @@ public class UserScore {
 
     @ColumnDefault("0.0")
     @Column(name = "total_score", nullable = false, precision = 2, scale = 1)
-    private BigDecimal totalScore;
+    private BigDecimal totalScore = BigDecimal.valueOf(0.0);
 
+    @UpdateTimestamp
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "registered_at", nullable = false)
-    private Instant registeredAt;
+    private Timestamp registeredAt;
 
     @Column(name = "comments", nullable = false, length = Integer.MAX_VALUE)
     private String comments;
 
+    @ColumnDefault("true")
+    @Column(name = "active", nullable = false)
+    private Boolean active = true;
 }
